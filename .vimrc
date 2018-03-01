@@ -2,10 +2,14 @@ command Setmakeprg
   \ let &l:makeprg=b:compile_cmd . b:execute_cmd . b:infile_cmd . b:outfile_cmd
 
 command Initmakeprg
-  \ let b:infile="input.txt"    |
-  \ let b:outfile="output.txt"  |
-  \ let b:infile_cmd=""         |
-  \ let b:outfile_cmd=""        |
+  \ if filereadable("./Makefile")    |
+  \   let b:compile_cmd="make"       |
+  \   let b:execute_cmd="; ./\"%<\"" |
+  \ endif                            |
+  \ let b:infile="input.txt"         |
+  \ let b:outfile="output.txt"       |
+  \ let b:infile_cmd=""              |
+  \ let b:outfile_cmd=""             |
   \ Setmakeprg
 
 autocmd BufNewFile,BufRead *.py
